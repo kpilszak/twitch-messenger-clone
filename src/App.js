@@ -41,7 +41,7 @@ const App = () => {
   if (!clientReady) return null;
 
   return (
-    <Chat client={client}>
+    <Chat client={client} darkMode={true}>
       <ChannelList filters={filters} sort={sort} options={options} />
       <Channel channel={channel}>
         <Window>
