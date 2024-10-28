@@ -1,27 +1,49 @@
+import React, { useEffect, useState } from 'react'
 import { StreamChat } from 'stream-chat'
-import { Chat, Channel, ChannelHeader, ChannelList, MessageInput, MessageList, Thread, Window, useCreateChatClient } from 'stream-chat-react'
+import { Chat, Channel, ChannelHeader, ChannelList, MessageInput, MessageList, Thread, Window } from 'stream-chat-react'
+// import 'stream-chat-css/dist/css/index.css'
 
-const apiKey = 'api-key';
-const userId = 'user-id';
-const token = 'authentication-token';
+const filters = { type: 'messaging' }
+const options = { state: true, presence: true, limit: 10 }
+const sort = { last_message_at: -1 }
 
-const filters = { members: { $in: [userId] }, type: 'messaging' };
-const options = { presence: true, state: true };
-const sort = { last_message_at: -1 };
+const client = StreamChat.getInstance('6t3abd8grfbz')
 
 const App = () => {
-  const client = useCreateChatClient({
-    apiKey,
-    tokenOrProvider: token,
-    userData: { id: userId },
-  });
+  const [clientReady, setClientReady] = useState(false);
+  const [channel, setChannel] = useState(null);
 
-  if (!client) return <div>Loading...</div>;
+  useEffect(() => {
+    const setupClient = async () => {
+      try {
+        await client.connectUser(
+          {
+            id: 'dave-matthews',
+            name: 'Dave Matthews'
+          },
+          ''
+        )
+        
+        const channel = await client.channel('gaming', 'gaming-demo', {
+          name: 'Gaming Demo'
+        })
+        setChannel(channel)
+
+        setClientReady(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    
+    setupClient()
+  }, [])
+
+  if (!clientReady) return null;
 
   return (
     <Chat client={client}>
-      <ChannelList sort={sort} filters={filters} options={options} />
-      <Channel>
+      <ChannelList filters={filters} sort={sort} options={options} />
+      <Channel channel={channel}>
         <Window>
           <ChannelHeader />
           <MessageList />
