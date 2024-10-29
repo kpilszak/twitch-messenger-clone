@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StreamChat } from 'stream-chat'
 import { Chat, Channel, ChannelHeader, ChannelList, MessageInput, MessageList, Thread, Window } from 'stream-chat-react'
-// import 'stream-chat-css/dist/css/index.css'
+import Auth from './components/Auth'
+import 'stream-chat-css/dist/css/index.css'
 
 const filters = { type: 'messaging' }
 const options = { state: true, presence: true, limit: 10 }
@@ -13,6 +14,8 @@ const App = () => {
   const [clientReady, setClientReady] = useState(false);
   const [channel, setChannel] = useState(null);
 
+  const authToken = true
+
   useEffect(() => {
     const setupClient = async () => {
       try {
@@ -23,7 +26,7 @@ const App = () => {
           },
           ''
         )
-        
+
         const channel = await client.channel('gaming', 'gaming-demo', {
           name: 'Gaming Demo'
         })
@@ -34,24 +37,26 @@ const App = () => {
         console.log(err);
       }
     };
-    
+
     setupClient()
   }, [])
 
   if (!clientReady) return null;
 
   return (
-    <Chat client={client} darkMode={true}>
-      <ChannelList filters={filters} sort={sort} options={options} />
-      <Channel channel={channel}>
-        <Window>
-          <ChannelHeader />
-          <MessageList />
-          <MessageInput />
-        </Window>
-        <Thread />
-      </Channel>
-    </Chat>
+    <>
+      {!authToken && <Auth />}
+      {authToken && <Chat client={client} darkMode={true}>
+        <Channel channel={channel}>
+          <Window>
+            <ChannelHeader />
+            <MessageList />
+            <MessageInput />
+          </Window>
+          <Thread />
+        </Channel>
+      </Chat>}
+    </>
   )
 }
 
