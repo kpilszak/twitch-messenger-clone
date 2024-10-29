@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StreamChat } from 'stream-chat'
-import { Chat, Channel, ChannelHeader, ChannelList, MessageInput, MessageList, Thread, Window } from 'stream-chat-react'
+import { Chat, Channel } from 'stream-chat-react'
 import Auth from './components/Auth'
+import MessagingContainer from './components/MessagingContainer'
 import 'stream-chat-css/dist/css/index.css'
 
 const filters = { type: 'messaging' }
@@ -48,12 +49,7 @@ const App = () => {
       {!authToken && <Auth />}
       {authToken && <Chat client={client} darkMode={true}>
         <Channel channel={channel}>
-          <Window>
-            <ChannelHeader />
-            <MessageList />
-            <MessageInput />
-          </Window>
-          <Thread />
+          <MessagingContainer />
         </Channel>
       </Chat>}
     </>
