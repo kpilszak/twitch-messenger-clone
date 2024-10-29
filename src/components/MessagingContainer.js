@@ -3,14 +3,14 @@ import React from "react"
 
 const MessagingContainer = () => {
     return (
-        <>
+        <div className='messaging-container'>
             <Window>
                 <ChannelHeader />
                 <MessageList />
                 <MessageInput />
             </Window>
             <Thread />
-        </>
+        </div>
     )
 }
 

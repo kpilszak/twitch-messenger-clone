@@ -3,6 +3,7 @@ import { StreamChat } from 'stream-chat'
 import { Chat, Channel } from 'stream-chat-react'
 import Auth from './components/Auth'
 import MessagingContainer from './components/MessagingContainer'
+import Video from './components/Video'
 import 'stream-chat-css/dist/css/index.css'
 
 const filters = { type: 'messaging' }
@@ -49,6 +50,7 @@ const App = () => {
       {!authToken && <Auth />}
       {authToken && <Chat client={client} darkMode={true}>
         <Channel channel={channel}>
+          <Video />
           <MessagingContainer />
         </Channel>
       </Chat>}
