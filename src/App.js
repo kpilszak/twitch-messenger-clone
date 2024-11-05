@@ -4,7 +4,6 @@ import { Chat, Channel } from 'stream-chat-react'
 import Auth from './components/Auth'
 import MessagingContainer from './components/MessagingContainer'
 import Video from './components/Video'
-import 'stream-chat-css/dist/css/index.css'
 
 const filters = { type: 'messaging' }
 const options = { state: true, presence: true, limit: 10 }
