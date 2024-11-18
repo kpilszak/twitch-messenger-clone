@@ -9,7 +9,9 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 
-
+const API_KEY = '6t3abd8grfbz'
+const API_SECRET = ''
+const APP_ID = '1337749'
 
 app.post('/signup', async (req, res) => {
     try {
@@ -45,6 +47,8 @@ app.post('/login', async (req, res) => {
 
         if (success) {
             res.status(200).json({ token, username: confirmedName, userId })
+        } else {
+            res.status(500).res.json({ message: 'Login failed' })
         }
     } catch (error) {
         console.log(error)
