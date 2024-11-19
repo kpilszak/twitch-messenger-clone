@@ -21,7 +21,7 @@ const MessagingContainer = ({users}) => {
         <div className='messaging-container'>
             {!userListVisible && (
                 <Window>
-                    <FaUsers onClick={() => setUserListVisible(true)} />
+                    <FaUsers className="icon" onClick={() => setUserListVisible(true)} />
                     <ChannelHeader />
                     <MessageList />
                     <MessageInput />
@@ -31,9 +31,11 @@ const MessagingContainer = ({users}) => {
             )}
             {userListVisible && (
                 <Window>
-                    <FaArrowAltCircleLeft onClick={() => setUserListVisible(false)} />
-                    <ChannelHeader title='Users' />
-                    <UserList users={users} />
+                    <div className="chat-container">
+                        <FaArrowAltCircleLeft className="icon" onClick={() => setUserListVisible(false)} />
+                        <ChannelHeader title='Users' />
+                        <UserList users={users} />
+                    </div>
                 </Window>
             )}
             <Thread />
