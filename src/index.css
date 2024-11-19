@@ -73,3 +73,23 @@ code {
  .standard-button:hover {
   background-color: #392a53;
  }
+
+ .userlist-container {
+  width: 100%;
+  padding: 20px;
+  height: 70%;
+  background-color: #151a1f;
+  overflow-y: scroll;
+ }
+
+.userlist-container li {
+  list-style: none;
+  padding: 3px;
+  margin: 0;
+  display: flex;
+}
+
+.userlist-container li p {
+  padding: 0 0 5px 5px;
+  margin: 0;
+}
