@@ -1,8 +1,9 @@
 import { ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react'
 import React from 'react'
 import { useCookies } from 'react-cookie'
+import UserList from './UserList'
 
-const MessagingContainer = () => {
+const MessagingContainer = ({users}) => {
     const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
     const logout = () => {
@@ -21,6 +22,7 @@ const MessagingContainer = () => {
                 <MessageList />
                 <MessageInput />
                 <button className="standard-button" onClick={logout}>Logout</button>
+                <UserList users={users}/>
             </Window>
             <Thread />
         </div>
