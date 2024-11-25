@@ -5,6 +5,7 @@ import { Chat, Channel } from 'stream-chat-react'
 import Auth from './components/Auth'
 import MessagingContainer from './components/MessagingContainer'
 import Video from './components/Video'
+import { customStyles } from './styles/customStyles'
 
 const client = StreamChat.getInstance('6t3abd8grfbz')
 
@@ -47,7 +48,7 @@ const App = () => {
   return (
     <>
       {!authToken && <Auth />}
-      {authToken && <Chat client={client} darkMode={true}>
+      {authToken && <Chat client={client} customStyles={customStyles}>
         <Channel channel={channel}>
           <Video />
           <MessagingContainer users={users}/>
